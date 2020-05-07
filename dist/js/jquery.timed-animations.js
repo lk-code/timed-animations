@@ -1,7 +1,16 @@
+/*!
+ * jQuery Timed Animations - https://github.com/lk-code/timed-animations
+ * Version - 1.0.0
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2020 Lars Krämer
+ */
+
 jQuery.fn.timedAnimations = function (options) {
 
     var defaults = {
-        timingOffset: 5000
+        timingOffset: 0, /* animation offset in milliseconds */
+        animationName: '', /* the css animation name */
     };
 
     var settings = $.extend({}, defaults, options);
@@ -17,6 +26,9 @@ jQuery.fn.timedAnimations = function (options) {
             instancedElements.push(element);
         },
 
+        /**
+         * registers all element-based events
+         */
         registerEvents: function (element) {
             var me = this;
 
@@ -25,16 +37,22 @@ jQuery.fn.timedAnimations = function (options) {
             });
         },
 
+        /**
+         * registers all global events for this plugin
+         */
         registerGlobalEvents: function () {
             var me = this;
 
-            $(window).on("scroll", $.proxy(me.onWindowScroll, me));
+            $(window).on("scroll", $.proxy(me.onWindowScroll));
         },
 
+        /**
+         * returns true if the given element is in the current viewport
+         * 
+         * @param element 
+         */
         isElementInViewport: function (element) {
             var me = this;
-
-            console.log('isElementInViewport');
 
             var elementTop = $(element).offset().top;
             var elementBottom = elementTop + $(element).outerHeight();
@@ -47,7 +65,16 @@ jQuery.fn.timedAnimations = function (options) {
             return isElementInViewport;
         },
 
-        onWindowScroll: function (element) {
+        /**
+         * executed if the event 'scroll' for window is triggered
+         */
+        onWindowScroll: function () {
+            var me = this;
+
+            methods.checkElements();
+        },
+
+        checkElements: function () {
             var me = this;
 
             $.each(instancedElements, function (index, element) {
@@ -56,18 +83,95 @@ jQuery.fn.timedAnimations = function (options) {
 
                     $(element).data('ta-started', 'true');
 
-                    methods.startAnimation(element);
+                    var animationStartOffset = methods.getStartOffsetOfElement(element);
+
+                    window.setTimeout(() => {
+                        methods.startAnimation(element);
+                    }, animationStartOffset);
                 }
             });
         },
 
+        /**
+         * returns the animation offset in milliseconds for the given element
+         * 
+         * @param element
+         */
+        getStartOffsetOfElement: function (element) {
+            var me = this;
+
+            var offset = settings.timingOffset;
+            var elementOffset = $(element).data('ta-start');
+
+            if (elementOffset >= 0) {
+                offset = elementOffset;
+            }
+
+            return offset;
+        },
+
+        /**
+         * returns the animation name (css) for the given element
+         * 
+         * @param element
+         */
+        getAnimationNameOfElement: function (element) {
+            var me = this;
+
+            var animationName = settings.animationName;
+            var elementAnimationName = $(element).data('ta-animation-name');
+
+            if (elementAnimationName && elementAnimationName.length > 0) {
+                animationName = elementAnimationName;
+            }
+
+            return animationName;
+        },
+
+        /**
+         * 
+         * @param element 
+         * @param animationName 
+         */
+        setAnimationForElement: function (element, animationName) {
+            var me = this;
+
+            $(element).css('animation-name', animationName);
+        },
+
+        /**
+         * starts the animation for the given element
+         * 
+         * @param element 
+         */
         startAnimation: function (element) {
+            var me = this;
+
+            var animationName = methods.getAnimationNameOfElement(element);
+            if (animationName && animationName.length > 0) {
+                methods.setAnimationForElement(element, animationName);
+                return;
+            }
+
+            methods.processStoryboarding();
+        },
+
+        /**
+         * 
+         * @param element 
+         * @param animationName 
+         */
+        processStoryboarding: function (element) {
             var me = this;
         },
     };
 
-    return this.each(function () {
+    this.each(function () {
         methods.init($(this));
-        methods.registerGlobalEvents();
     });
+
+    methods.registerGlobalEvents();
+    methods.checkElements();
+
+    return;
 };

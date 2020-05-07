@@ -9,12 +9,17 @@
 
     <title>jQuery TimedAnimations</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <!-- FontAwesome core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css"
+        integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
+    <!-- animate.css CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+        integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
 
     <!-- Custom styles for this template -->
     <style>
@@ -24,18 +29,80 @@
 
         #animationElement01 {
             position: relative;
-            top: 100vh;
+            top: 120vh;
             height: 150px;
-            width: 100%;
+            width: 150px;
             background-color: blue;
         }
 
         #animationElement02 {
             position: relative;
-            top: 50vh;
             height: 150px;
-            width: 100%;
+            width: 150px;
             background-color: yellow;
+        }
+
+        @-webkit-keyframes farbe {
+            0% {
+                background-color: rgba(255, 0, 0, 1);
+                top: 0px;
+                left: 0px;
+            }
+
+            25% {
+                top: 0px;
+                left: 150px;
+            }
+
+            50% {
+                top: 150px;
+                left: 150px;
+            }
+
+            75% {
+                top: 150px;
+                left: 0px;
+            }
+
+            100% {
+                top: 0px;
+                left: 0px;
+                background-color: rgba(255, 0, 255, 1);
+            }
+        }
+
+        @keyframes farbe {
+            0% {
+                background-color: rgba(255, 0, 0, 1);
+                top: 0px;
+                left: 0px;
+            }
+
+            25% {
+                top: 0px;
+                left: 150px;
+            }
+
+            50% {
+                top: 150px;
+                left: 150px;
+            }
+
+            75% {
+                top: 150px;
+                left: 0px;
+            }
+
+            100% {
+                top: 0px;
+                left: 0px;
+                background-color: rgba(255, 0, 255, 1);
+            }
+        }
+
+        .farbe {
+            -webkit-animation-name: farbe;
+            animation-name: farbe;
         }
     </style>
 </head>
@@ -45,7 +112,7 @@
     <nav class="site-header py-1">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
             <a class="py-2" href="#">
-                <i class="fa fa-crosshairs fa-2x"></i>
+                <i class="fa fa-dragon fa-2x"></i>
             </a>
         </div>
     </nav>
@@ -55,30 +122,23 @@
 
         <div class="col-md-5 p-lg-5 mx-auto animation-container">
             <h3>animations via data-attribute</h3>
-            <div class="timed-animation" id="animationElement01">
+            <div class="animated timed-animation" id="animationElement01" data-ta-animation-name="shake">
 
             </div>
-            <div class="timed-animation" id="animationElement02">
+            <div class="animated timed-animation" id="animationElement02" data-ta-start="2500"
+                data-ta-animation-name="farbe">
 
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script>
-        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
+    <!-- jQuery JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"
+        integrity="sha256-oKpAiD7qu3bXrWRVxnXLV1h7FlNV+p5YJBIr8LOCFYw=" crossorigin="anonymous"></script>
 
     <script src="../dist/js/jquery.timed-animations.js"></script>
     <script>
