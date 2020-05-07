@@ -106,9 +106,12 @@ jQuery.fn.timedAnimations = function (options) {
 
             var cssAnimationName = $(element).css('animation-name');
 
-            if(cssAnimationName && cssAnimationName != 'none') {
+            if ($(element).data('ta-cssprocessed') != 'true'
+                && cssAnimationName && cssAnimationName != 'none') {
                 $(element).css('animation-name', 'none')
                 $(element).data('ta-animation-name', cssAnimationName);
+
+                $(element).data('ta-cssprocessed', 'true');
             }
         },
 
