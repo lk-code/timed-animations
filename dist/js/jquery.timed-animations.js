@@ -85,7 +85,7 @@ jQuery.fn.timedAnimations = function (options) {
 
                     var animationStartOffset = methods.getStartOffsetOfElement(element);
 
-                    window.setTimeout(() => {
+                    window.setTimeout(function () {
                         methods.startAnimation(element);
                     }, animationStartOffset);
                 }
