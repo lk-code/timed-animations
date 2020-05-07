@@ -25,14 +25,15 @@
     <style>
         .animation-container {
             height: 200vh;
+            top: 120vh;
         }
 
         #animationElement01 {
             position: relative;
-            top: 120vh;
             height: 150px;
             width: 150px;
             background-color: blue;
+            margin-top: 50px;
         }
 
         #animationElement02 {
@@ -40,6 +41,15 @@
             height: 150px;
             width: 150px;
             background-color: yellow;
+            margin-top: 50px;
+        }
+
+        #animationElement03 {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            background-color: green;
+            margin-top: 50px;
         }
 
         @-webkit-keyframes farbe {
@@ -125,7 +135,10 @@
             <div class="animated timed-animation" id="animationElement01" data-ta-animation-name="shake">
 
             </div>
-            <div class="animated timed-animation" id="animationElement02" data-ta-start="2500"
+            <div class="animated timed-animation farbe" id="animationElement02" data-ta-start="2500">
+
+            </div>
+            <div class="animated timed-animation" id="animationElement03" data-ta-start="5000"
                 data-ta-animation-name="farbe">
 
             </div>
@@ -140,7 +153,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"
         integrity="sha256-oKpAiD7qu3bXrWRVxnXLV1h7FlNV+p5YJBIr8LOCFYw=" crossorigin="anonymous"></script>
 
-    <script src="../dist/js/jquery.timed-animations.min.js"></script>
+    <script src="../dist/js/jquery.timed-animations.js"></script>
     <script>
         $(".timed-animation").timedAnimations();
     </script>

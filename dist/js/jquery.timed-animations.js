@@ -74,10 +74,15 @@ jQuery.fn.timedAnimations = function (options) {
             methods.checkElements();
         },
 
+        /**
+         * process every element
+         */
         checkElements: function () {
             var me = this;
 
             $.each(instancedElements, function (index, element) {
+                methods.processCssAnimationInElement(element);
+
                 if ($(element).data('ta-started') != 'true'
                     && methods.isElementInViewport(element)) {
 
@@ -90,6 +95,21 @@ jQuery.fn.timedAnimations = function (options) {
                     }, animationStartOffset);
                 }
             });
+        },
+
+        /**
+         * 
+         * @param element
+         */
+        processCssAnimationInElement: function (element) {
+            var me = this;
+
+            var cssAnimationName = $(element).css('animation-name');
+
+            if(cssAnimationName && cssAnimationName != 'none') {
+                $(element).css('animation-name', 'none')
+                $(element).data('ta-animation-name', cssAnimationName);
+            }
         },
 
         /**
