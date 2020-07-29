@@ -52,6 +52,14 @@
             margin-top: 50px;
         }
 
+        #animationElement04 {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            background-color: orange;
+            margin-top: 50px;
+        }
+
         @-webkit-keyframes farbe {
             0% {
                 background-color: rgba(255, 0, 0, 1);
@@ -142,6 +150,10 @@
                 data-ta-animation-name="farbe">
 
             </div>
+            <div class="animated timed-animation" id="animationElement04" data-ta-start="5000"
+                data-ta-animation-name="farbe">
+
+            </div>
         </div>
     </div>
 
@@ -155,7 +167,13 @@
 
     <script src="../dist/js/jquery.timed-animations.js"></script>
     <script>
-        $(".timed-animation").timedAnimations();
+        $(document).ready(function () {
+            $(".timed-animation").timedAnimations();
+
+            $("#animationElement04").bind("ta-started", function (event, data) {
+                $("#animationElement04").html("event 'ta-started' triggered");
+            });
+        });
     </script>
 </body>
 
