@@ -91,6 +91,8 @@ jQuery.fn.timedAnimations = function (options) {
                     var animationStartOffset = methods.getStartOffsetOfElement(element);
 
                     window.setTimeout(function () {
+                        $(element).trigger('ta-started');
+
                         methods.startAnimation(element);
                     }, animationStartOffset);
                 }
